@@ -80,4 +80,42 @@ describe('FormControl', () => {
 
     expect(formControl.getAttribute('value')).toBe(FIELD_TEST_VALUE);
   });
+  it('renders select and options', () => {
+    const { getByLabelText, container } = render(
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          [FIELD_TEST_NAME]: FIELD_TEST_VALUE,
+        }}
+      >
+        <Field tag="select" name={FIELD_TEST_NAME} component={FormControl}>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </Field>
+      </Formik>
+    );
+
+    const formControl = getByLabelText('form-control') as HTMLElement;
+
+    expect(formControl.tagName).toBe('SELECT');
+    expect(container.querySelectorAll('option').length).toBe(3);
+  });
+  it('renders textarea', () => {
+    const { getByLabelText } = render(
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          [FIELD_TEST_NAME]: FIELD_TEST_VALUE,
+        }}
+      >
+        <Field tag="textarea" name={FIELD_TEST_NAME} component={FormControl} />
+      </Formik>
+    );
+
+    const formControl = getByLabelText('form-control') as HTMLElement;
+
+    expect(formControl.tagName).toBe('TEXTAREA');
+    expect(formControl.textContent).toBe(FIELD_TEST_VALUE);
+  });
 });

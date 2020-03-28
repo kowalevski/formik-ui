@@ -1,15 +1,18 @@
-import { FormControlProps } from 'react-bootstrap/FormControl';
-import { FieldProps } from 'formik';
+import { FormControlProps as ControlProps } from 'react-bootstrap';
+import { Props as FormControlProps } from './FormControl';
+import { BsPrefixProps } from 'react-bootstrap/helpers';
 
 export const getFieldPropsForFormControl = ({
   disabled,
   field,
+  tag,
   form: { isSubmitting },
   ...props
-}: FormControlProps & FieldProps): FormControlProps => {
+}: FormControlProps): ControlProps & BsPrefixProps<React.ElementType> => {
   return {
     ...field,
     ...props,
     disabled: disabled || isSubmitting,
+    as: tag,
   };
 };

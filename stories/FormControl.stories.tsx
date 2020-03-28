@@ -8,6 +8,8 @@ type FormValues = {
   email: string;
   username: string;
   password: string;
+  rating: string;
+  comment: string;
 };
 
 export const FormControlStory: React.FC = () => {
@@ -22,6 +24,8 @@ export const FormControlStory: React.FC = () => {
           email: '',
           username: '',
           password: '',
+          rating: '',
+          comment: '',
         }}
       >
         <Form>
@@ -45,6 +49,26 @@ export const FormControlStory: React.FC = () => {
                 name="password"
                 component={FormControl}
                 placeholder="Your password"
+              />
+              <br />
+              <Field
+                tag="select"
+                name="rating"
+                component={FormControl}
+                placeholder="Select..."
+              >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </Field>
+              <br />
+              <Field
+                tag="textarea"
+                name="comment"
+                component={FormControl}
+                placeholder="Enter your comment"
               />
               <br />
               <ButtonToolbar>
