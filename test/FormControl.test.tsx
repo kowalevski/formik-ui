@@ -11,6 +11,7 @@ import {
   FIELD_TEST_SIZE_SM,
   FIELD_TEST_VALUE,
   FIELD_TEST_PLACEHOLDER,
+  FIELD_TEST_ERROR_TEXT,
 } from './constants';
 
 describe('FormControl', () => {
@@ -109,7 +110,12 @@ describe('FormControl', () => {
           [FIELD_TEST_NAME]: FIELD_TEST_VALUE,
         }}
       >
-        <Field tag="textarea" name={FIELD_TEST_NAME} component={FormControl} />
+        <Field
+          tag="textarea"
+          rows={3}
+          name={FIELD_TEST_NAME}
+          component={FormControl}
+        />
       </Formik>
     );
 
@@ -117,8 +123,9 @@ describe('FormControl', () => {
 
     expect(formControl.tagName).toBe('TEXTAREA');
     expect(formControl.textContent).toBe(FIELD_TEST_VALUE);
+    expect(formControl.getAttribute('rows')).toBe('3');
   });
-  it('renders invalid validation view', () => {
+  it('renders injected invalid validation view', () => {
     const { getByLabelText } = render(
       <Formik
         onSubmit={() => {}}
@@ -132,6 +139,51 @@ describe('FormControl', () => {
 
     const formControl = getByLabelText('form-control') as HTMLElement;
 
-    expect(formControl.className).toMatch('is-invalid');
+    expect(formControl).toHaveClass('is-invalid');
+  });
+  it('renders invalid validation view', () => {
+    const { getByLabelText } = render(
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          [FIELD_TEST_NAME]: FIELD_TEST_VALUE,
+        }}
+        initialErrors={{
+          [FIELD_TEST_NAME]: 'error!',
+        }}
+        initialTouched={{
+          [FIELD_TEST_NAME]: true,
+        }}
+      >
+        <Field name={FIELD_TEST_NAME} component={FormControl} />
+      </Formik>
+    );
+
+    const formControl = getByLabelText('form-control') as HTMLElement;
+
+    expect(formControl).toHaveClass('is-invalid');
+  });
+  it('renders invalid validation view without touch', () => {
+    const { getByLabelText } = render(
+      <Formik
+        onSubmit={() => {}}
+        initialValues={{
+          [FIELD_TEST_NAME]: FIELD_TEST_VALUE,
+        }}
+        initialErrors={{
+          [FIELD_TEST_NAME]: FIELD_TEST_ERROR_TEXT,
+        }}
+      >
+        <Field
+          isTouchRequired={false}
+          name={FIELD_TEST_NAME}
+          component={FormControl}
+        />
+      </Formik>
+    );
+
+    const formControl = getByLabelText('form-control') as HTMLElement;
+
+    expect(formControl).toHaveClass('is-invalid');
   });
 });

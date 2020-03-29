@@ -5,3 +5,5 @@ export const FIELD_TEST_ID = 'testId';
 export const FIELD_TEST_CLASS_NAME = 'test-class';
 export const FIELD_TEST_PLACEHOLDER = 'Enter the value';
 export const FIELD_TEST_SIZE_SM = 'sm';
+export const FIELD_TEST_LABEL_TEXT = 'test text';
+export const FIELD_TEST_ERROR_TEXT = 'error message';

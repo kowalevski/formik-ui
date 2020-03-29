@@ -1,18 +1,62 @@
 import { FormControlProps as ControlProps } from 'react-bootstrap';
+import { getIn } from 'formik';
 import { Props as FormControlProps } from './FormControl';
 import { BsPrefixProps } from 'react-bootstrap/helpers';
 
-export const getFieldPropsForFormControl = ({
+export const getFieldErrorProps = ({
+  field,
+  form,
+  isTouchRequired,
+}: Pick<FormControlProps, 'field' | 'form' | 'isTouchRequired'>): {
+  fieldError: string | undefined;
+  showError: boolean;
+} => {
+  const fieldError = field.name ? getIn(form.errors, field.name) : '';
+  const showError =
+    (isTouchRequired && getIn(form.touched, field.name) && !!fieldError) ||
+    (!isTouchRequired && !!fieldError);
+
+  return {
+    fieldError,
+    showError,
+  };
+};
+
+export const getFieldFormControlProps = ({
   disabled,
   field,
   tag,
-  form: { isSubmitting },
+  isInvalid,
+  isTouchRequired = true,
+  form,
   ...props
 }: FormControlProps): ControlProps & BsPrefixProps<React.ElementType> => {
+  const { showError } = getFieldErrorProps({
+    field,
+    form,
+    isTouchRequired,
+  });
+
   return {
     ...field,
     ...props,
-    disabled: disabled || isSubmitting,
+    isInvalid: isInvalid ?? showError,
+    disabled: disabled || form.isSubmitting,
     as: tag,
   };
+};
+
+export const getFieldFormFeedbackType = ({
+  field,
+  isInvalid,
+  isTouchRequired = true,
+  form,
+}: FormControlProps): 'valid' | 'invalid' => {
+  const { showError } = getFieldErrorProps({
+    field,
+    form,
+    isTouchRequired,
+  });
+
+  return isInvalid ?? showError ? 'invalid' : 'valid';
 };
