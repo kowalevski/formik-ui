@@ -1,6 +1,10 @@
-import { FormControlProps as ControlProps } from 'react-bootstrap';
+import {
+  FormControlProps as ControlProps,
+  // FormCheckProps as CheckProps,
+} from 'react-bootstrap';
 import { getIn } from 'formik';
 import { Props as FormControlProps } from './FormControl';
+import { Props as FormCheckProps } from './FormCheck';
 import { BsPrefixProps } from 'react-bootstrap/helpers';
 
 export const getFieldErrorProps = ({
@@ -43,6 +47,29 @@ export const getFieldFormControlProps = ({
     isInvalid: isInvalid ?? showError,
     disabled: disabled || form.isSubmitting,
     as: tag,
+  };
+};
+
+export const getFieldFormCheckProps = ({
+  disabled,
+  field,
+  isInvalid,
+  isTouchRequired = true,
+  form,
+  ...props
+}: FormCheckProps): any => {
+  const { showError, fieldError } = getFieldErrorProps({
+    field,
+    form,
+    isTouchRequired,
+  });
+
+  return {
+    ...field,
+    ...props,
+    isInvalid: isInvalid ?? showError,
+    feedback: fieldError,
+    disabled: disabled || form.isSubmitting,
   };
 };
 

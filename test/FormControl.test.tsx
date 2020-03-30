@@ -2,7 +2,7 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Formik, Field } from 'formik';
-import { FormControl } from '../src';
+import { FormControl, FORM_CONTROL_TEST_ID } from '../src';
 import {
   FIELD_TEST_NAME,
   FIELD_TEST_TYPE_EMAIL,
@@ -16,16 +16,16 @@ import {
 
 describe('FormControl', () => {
   it('renders without crashing', () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik onSubmit={() => {}} initialValues={{}}>
         <Field component={FormControl} />
       </Formik>
     );
 
-    expect(getByLabelText('form-control')).toBeTruthy();
+    expect(getByTestId(FORM_CONTROL_TEST_ID)).toBeTruthy();
   });
   it("renders with general Field's attributes", () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik onSubmit={() => {}} initialValues={{}}>
         <Field
           name={FIELD_TEST_NAME}
@@ -38,7 +38,7 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control');
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID);
 
     expect(formControl.getAttribute('name')).toBe(FIELD_TEST_NAME);
     expect(formControl.getAttribute('type')).toBe(FIELD_TEST_TYPE_EMAIL);
@@ -49,7 +49,7 @@ describe('FormControl', () => {
     );
   });
   it('renders with additional FormControl options', () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik onSubmit={() => {}} initialValues={{}}>
         <Field
           disabled
@@ -60,13 +60,13 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control') as HTMLElement;
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID) as HTMLElement;
 
     expect(formControl.className).toMatch(`form-control-${FIELD_TEST_SIZE_SM}`);
     expect(formControl).toHaveAttribute('disabled');
   });
   it('renders value', () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik
         onSubmit={() => {}}
         initialValues={{
@@ -77,12 +77,12 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control') as HTMLElement;
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID) as HTMLElement;
 
     expect(formControl.getAttribute('value')).toBe(FIELD_TEST_VALUE);
   });
   it('renders select and options', () => {
-    const { getByLabelText, container } = render(
+    const { getByTestId, container } = render(
       <Formik
         onSubmit={() => {}}
         initialValues={{
@@ -97,13 +97,13 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control') as HTMLElement;
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID) as HTMLElement;
 
     expect(formControl.tagName).toBe('SELECT');
     expect(container.querySelectorAll('option').length).toBe(3);
   });
   it('renders textarea', () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik
         onSubmit={() => {}}
         initialValues={{
@@ -119,14 +119,14 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control') as HTMLElement;
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID) as HTMLElement;
 
     expect(formControl.tagName).toBe('TEXTAREA');
     expect(formControl.textContent).toBe(FIELD_TEST_VALUE);
     expect(formControl.getAttribute('rows')).toBe('3');
   });
   it('renders injected invalid validation view', () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik
         onSubmit={() => {}}
         initialValues={{
@@ -137,12 +137,12 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control') as HTMLElement;
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID) as HTMLElement;
 
     expect(formControl).toHaveClass('is-invalid');
   });
   it('renders invalid validation view', () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik
         onSubmit={() => {}}
         initialValues={{
@@ -159,12 +159,12 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control') as HTMLElement;
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID) as HTMLElement;
 
     expect(formControl).toHaveClass('is-invalid');
   });
   it('renders invalid validation view without touch', () => {
-    const { getByLabelText } = render(
+    const { getByTestId } = render(
       <Formik
         onSubmit={() => {}}
         initialValues={{
@@ -182,7 +182,7 @@ describe('FormControl', () => {
       </Formik>
     );
 
-    const formControl = getByLabelText('form-control') as HTMLElement;
+    const formControl = getByTestId(FORM_CONTROL_TEST_ID) as HTMLElement;
 
     expect(formControl).toHaveClass('is-invalid');
   });
