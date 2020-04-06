@@ -13,5 +13,11 @@
     "dev": "lerna run start --stream --parallel",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff"
-  }
+  },
+  "keywords": [
+    "react",
+    "formik",
+    "react-bootstrap",
+    "form"
+  ]
 }

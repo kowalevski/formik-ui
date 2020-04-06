@@ -34,7 +34,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "formik-bootstrap",
+  "name": "formik-ui-bootstrap",
   "author": "kowalevski",
   "module": "dist/formik-bootstrap.esm.js",
   "devDependencies": {
