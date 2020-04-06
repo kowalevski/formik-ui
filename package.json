@@ -1,6 +1,6 @@
 {
   "name": "formik-ui",
-  "author": "Max Kowalevski <me@kowalevski.com>",
+  "author": "kowalevski",
   "license": "MIT",
   "private": true,
   "devDependencies": {
