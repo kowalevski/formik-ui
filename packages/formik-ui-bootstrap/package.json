@@ -1,5 +1,5 @@
 {
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -74,5 +74,5 @@
     "typescript": "^3.8.3",
     "yup": "^0.28.3"
   },
-  "gitHead": "d7036c90f0854068c75072f2c28a360923348993"
+  "gitHead": "74084e3a921a589318c51a3af02fd4b20bdd4762"
 }
