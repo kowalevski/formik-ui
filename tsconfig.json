@@ -21,7 +21,7 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "formik-bootstrap": ["./packages/formik-bootstrap/src"]
+      "formik-bootstrap": ["./packages/formik-ui-bootstrap/src"]
     },
     "jsx": "react",
     "esModuleInterop": true
