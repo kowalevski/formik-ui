@@ -17,6 +17,12 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "keywords": [
+    "react",
+    "formik",
+    "react-bootstrap",
+    "form"
+  ],
   "peerDependencies": {
     "formik": "^2.1.4",
     "react": ">=16",
@@ -63,5 +69,5 @@
     "typescript": "^3.8.3",
     "yup": "^0.28.3"
   },
-  "gitHead": "f29366f6c141c55f5e168cda2ed06de8c7f17d61"
+  "gitHead": "1d8b2206a195d5c8348434f754fe492739205fd2"
 }
